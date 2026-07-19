@@ -1,5 +1,6 @@
 mod app_config;
 mod app_store;
+mod auto_launch;
 mod claude_desktop_config;
 mod claude_mcp;
 mod claude_plugin;
@@ -942,14 +943,7 @@ pub fn run() {
             }
 
             let _tray = tray_builder.build(app)?;
-            crate::services::webdav_auto_sync::start_worker(
-                app_state.db.clone(),
-                app.handle().clone(),
-            );
-            crate::services::s3_auto_sync::start_worker(
-                app_state.db.clone(),
-                app.handle().clone(),
-            );
+            // Auto-sync disabled in personal build
             // 将同一个实例注入到全局状态，避免重复创建导致的不一致
             app.manage(app_state);
 

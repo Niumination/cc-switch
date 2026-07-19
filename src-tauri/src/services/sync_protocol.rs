@@ -13,10 +13,7 @@ use tempfile::tempdir;
 
 use crate::error::AppError;
 
-// Re-export archive functions for use by transport layers.
-pub(crate) use super::webdav_sync::archive::{
-    backup_current_skills, restore_skills_from_backup, restore_skills_zip, zip_skills_ssot,
-};
+// Re-export archive functions are disabled in personal build
 
 // ─── Protocol constants ──────────────────────────────────────
 

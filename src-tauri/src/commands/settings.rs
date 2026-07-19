@@ -194,23 +194,6 @@ pub async fn get_app_config_dir_override(app: AppHandle) -> Result<Option<String
     Ok(crate::app_store::refresh_app_config_dir_override(&app)
         .map(|p| p.to_string_lossy().to_string()))
 }
-
-pub async fn get_app_config_dir_override(app: AppHandle) -> Result<Option<String>, String> {
-    Ok(crate::app_store::refresh_app_config_dir_override(&app)
-        .map(|p| p.to_string_lossy().to_string()))
-}
-
-/// 设置开机自启
-#[tauri::command]
-pub async fn set_auto_launch(enabled: bool) -> Result<bool, String> {
-    if enabled {
-        crate::auto_launch::enable_auto_launch().map_err(|e| format!("启用开机自启失败: {e}"))?;
-    } else {
-        crate::auto_launch::disable_auto_launch().map_err(|e| format!("禁用开机自启失败: {e}"))?;
-    }
-    Ok(true)
-}
-
 #[cfg(test)]
 mod tests {
     use super::merge_settings_for_save;

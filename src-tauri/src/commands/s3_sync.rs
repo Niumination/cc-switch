@@ -109,7 +109,6 @@ pub async fn s3_sync_download(state: State<'_, AppState>) -> Result<Value, Strin
     let db = state.db.clone();
     let db_for_sync = db.clone();
     let mut settings = require_enabled_s3_settings()?;
-    let _auto_sync_suppression = crate::services::s3_auto_sync::AutoSyncSuppressionGuard::new();
 
     let sync_result = run_with_s3_lock(s3_sync_service::download(&db, &mut settings)).await;
     let mut result = map_sync_result(sync_result, |error| {
