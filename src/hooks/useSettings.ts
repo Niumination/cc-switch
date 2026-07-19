@@ -221,22 +221,7 @@ export function useSettings(): UseSettingsResult {
         // 保存到配置文件
         await saveMutation.mutateAsync(payload);
 
-        // 如果开机自启状态改变，调用系统 API
-        if (
-          payload.launchOnStartup !== undefined &&
-          payload.launchOnStartup !== data?.launchOnStartup
-        ) {
-          try {
-            await settingsApi.setAutoLaunch(payload.launchOnStartup);
-          } catch (error) {
-            console.error("Failed to update auto-launch:", error);
-            toast.error(
-              t("settings.autoLaunchFailed", {
-                defaultValue: "设置开机自启失败",
-              }),
-            );
-          }
-        }
+
 
         // Claude Code 初次安装确认：开=写入 hasCompletedOnboarding=true；关=删除该字段
         // 仅在本次更新包含 skipClaudeOnboarding 时触发，避免其它自动保存误触发

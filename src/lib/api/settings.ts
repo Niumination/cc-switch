@@ -53,14 +53,6 @@ export const settingsApi = {
     return await invoke("restart_app");
   },
 
-  async installUpdateAndRestart(): Promise<boolean> {
-    return await invoke("install_update_and_restart");
-  },
-
-  async checkUpdates(): Promise<void> {
-    await invoke("check_for_updates");
-  },
-
   async isPortable(): Promise<boolean> {
     return await invoke("is_portable_mode");
   },
@@ -223,14 +215,6 @@ export const settingsApi = {
       throw new Error("Invalid URL");
     }
     await invoke("open_external", { url });
-  },
-
-  async setAutoLaunch(enabled: boolean): Promise<boolean> {
-    return await invoke("set_auto_launch", { enabled });
-  },
-
-  async getAutoLaunchStatus(): Promise<boolean> {
-    return await invoke("get_auto_launch_status");
   },
 
   async getToolVersions(
