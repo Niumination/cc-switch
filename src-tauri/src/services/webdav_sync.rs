@@ -17,7 +17,7 @@ pub mod archive {
     }
 
     #[allow(dead_code)]
-    pub fn restore_skills_zip(_zip: String) -> Result<String, AppError> {
+    pub fn restore_skills_zip(_zip: &[u8]) -> Result<String, AppError> {
         Err(AppError::Config("WebDAV sync disabled in personal build".into()))
     }
 
@@ -39,7 +39,7 @@ pub async fn run_with_sync_lock<T, Fut>(operation: Fut) -> Result<T, AppError>
 where
     Fut: std::future::Future<Output = Result<T, AppError>>,
 {
-    let _guard = sync_mutex().await;
+    let _guard = sync_mutex().lock().await;
     operation.await
 }
 
