@@ -12,8 +12,9 @@ use sha2::{Digest, Sha256};
 use tempfile::tempdir;
 
 use crate::error::AppError;
-
-// Re-export archive functions are disabled in personal build
+use crate::services::webdav_sync::archive::{
+    backup_current_skills, restore_skills_from_backup, restore_skills_zip, zip_skills_ssot,
+};
 
 // ─── Protocol constants ──────────────────────────────────────
 

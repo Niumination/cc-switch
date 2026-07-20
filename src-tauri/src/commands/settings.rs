@@ -1,6 +1,6 @@
 #![allow(non_snake_case)]
 
-use tauri::{AppHandle, Emitter};
+use tauri::AppHandle;
 
 /// 应用更新下载进度（通过 `update-download-progress` 事件发给前端）。
 #[derive(Clone, serde::Serialize)]
@@ -194,6 +194,16 @@ pub async fn get_app_config_dir_override(app: AppHandle) -> Result<Option<String
     Ok(crate::app_store::refresh_app_config_dir_override(&app)
         .map(|p| p.to_string_lossy().to_string()))
 }
+/// 设置 app_config_dir 覆盖配置 (到 Store)
+#[tauri::command]
+pub async fn set_app_config_dir_override(
+    app: AppHandle,
+    path: Option<String>,
+) -> Result<bool, String> {
+    crate::app_store::set_app_config_dir_to_store(&app, path.as_deref())?;
+    Ok(true)
+}
+
 #[cfg(test)]
 mod tests {
     use super::merge_settings_for_save;
@@ -502,8 +512,6 @@ mod tests {
     }
 }
 
-/// 获取开机自启状态
-#[tauri::command]
 /// 获取整流器配置
 #[tauri::command]
 pub async fn get_rectifier_config(

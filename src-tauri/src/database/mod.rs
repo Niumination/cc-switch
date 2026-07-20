@@ -80,7 +80,7 @@ pub struct Database {
     pub(crate) conn: Mutex<Connection>,
 }
 
-fn register_db_change_hook(conn: &Connection) {
+fn register_db_change_hook(_conn: &Connection) {
     // Auto-sync disabled in personal build
 }
 
