@@ -847,11 +847,6 @@ export function AboutSection({ isPortable }: AboutSectionProps) {
             </Button>
           </div>
         </div>
-                {updateInfo.notes}
-              </p>
-            )}
-          </motion.div>
-        )}
       </motion.div>
 
       <div className="space-y-3">
